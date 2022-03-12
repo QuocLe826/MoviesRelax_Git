@@ -4,35 +4,57 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title - Quản trị hệ thống</title>
     <link rel="stylesheet" href="~/Content/Administration/main_styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
     <div class="container">
         <!--Sidebar-->
-        <section class="side-bar-section">
-            <div id="user-container">
-                <img src="~/archives/users/admin.png" width="128" height="128"/>
-            </div>
-            <ul id="main-menu">
-                <li><a href="#">Tổng quát</a></li>
-                <li>
-                    <a href="#">Danh mục</a>
-                    <ul id="sub-menu">
-                        <li>
-                        <a href="#">Thể loại phim</a></li>
-                        <li><a href="#">Quốc gia</a></li>
-                        <li><a href="#">Diễn viên</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Quản lý phim</a></li>
-                <li><a href="#">Quản lý người dùng</a></li>
-                <li><a href="#">Phân quyền</a></li>
-                <li class="log-out"><a href="#">Đăng xuất</a></li>
-            </ul>
-        </section>
+       <section class="side-bar">
+           <div class="user-container">
+               <div class="avatar">
+                   <img src="~/archives/users/admin-1.png"/>
+               </div>
+               <div class="info">
+                   <h3>Lê Văn Quốc</h3>
+                   <h4>Quản trị viên</h4>
+               </div>
+           </div>
+           <ul class="fa-ul menu">
+               <li>
+                   <i class="fa-lg fa-solid fa-house-chimney" style="color: white"></i>
+                   <a href="#">Tổng quát</a>
+               </li>
+               <li>
+                   <i class="fa-lg fa-solid fa-bars" style="color:white"></i>
+                   <a href="#">Danh mục</a>
+                   <ul>
+                       <li><a href="#">Thể loại phim</a></li>
+                       <li><a href="#">Quốc gia</a></li>
+                       <li><a href="#">Diễn viên - Đạo diễn</a></li>
+                   </ul>
+               </li>
+               <li>
+                   <i class="fa-lg fa-solid fa-clapperboard" style="color: white"></i>
+                   <a href="#">Quản lý phim</a>
+               </li>
+               <li>
+                   <i class="fa-lg fa-solid fa-users" style="color: white"></i>
+                   <a href="#">Quản lý người dùng</a>
+               </li>
+               <li>
+                   <i class="fa-lg fa-solid fa-elevator" style="color: white"></i>
+                   <a href="#">Phân quyền</a>
+               </li>
+               <li class="btn-log-out">
+                   <i class="fa-lg fa-solid fa-right-from-bracket" style="color: white"></i>
+                   <a href="#">Đăng xuất</a>
+               </li>
+           </ul>
+       </section>
 
         <!--Home-->
-        <section class="home-section">
+        <section class="home">
             <div class="home-header">
                 <span>Tổng quát</span>
             </div>

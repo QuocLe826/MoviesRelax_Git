@@ -165,6 +165,7 @@
     <Compile Include="Security\MD5Security.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="archives\users\admin-1.png" />
     <Content Include="archives\users\admin.png" />
     <Content Include="Content\Administration\login_styles.css" />
     <Content Include="Content\Administration\main_styles.css" />
@@ -178,6 +179,10 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\background-admin.jpg" />
+    <Content Include="Images\code-square.svg" />
+    <Content Include="Images\film.svg" />
+    <Content Include="Images\people-fill.svg" />
+    <Content Include="Images\tag-fill.svg" />
     <Content Include="Images\user-admin.png" />
     <Content Include="Models\MoviesRelaxModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
