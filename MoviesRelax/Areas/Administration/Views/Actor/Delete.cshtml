@@ -1,0 +1,94 @@
+﻿@model MoviesRelax.Models.ACTOR
+
+@{
+    ViewBag.Title = "Thêm mới";
+    Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("SaveData", "Actor", new { type = "A" }, FormMethod.Post, new { name = "frm-add-actor", enctype = "multipart/form-data", @class = "form-data-input" }))
+{
+    <h2>Thêm mới</h2>
+    <hr />
+
+    <div class="text">
+
+        <!--Name-->
+        <div class="form-element">
+            @Html.LabelFor(m => m.Name, new { @class = "label required" })
+            @Html.TextBoxFor(m => m.Name, new { @class = "textbox-input" })
+            @Html.ValidationMessageFor(m => m.Name, null, new { @class = "message-error" })
+        </div>
+
+        <div class="form-element">
+
+            <!--DOB-->
+            <div id="day-birth" class="form-child-element">
+                @Html.LabelFor(m => m.DOB, new { @class = "label required" })
+                @Html.TextBoxFor(m => m.DOB, new { type = "date", @class = "date-input" })
+                @Html.ValidationMessageFor(m => m.DOB, null, new { @class = "message-error" })
+            </div>
+
+            <!--PlaceOBirth-->
+            <div class="form-child-element" id="place-birth">
+                @Html.LabelFor(m => m.PlaceOBirth, new { @class = "label required" })
+                @Html.TextBoxFor(m => m.PlaceOBirth, new { @class = "textbox-input" })
+                @Html.ValidationMessageFor(m => m.PlaceOBirth, null, new { @class = "message-error" })
+            </div>
+
+        </div>
+
+        <!--Height-->
+        <div class="form-element">
+            @Html.LabelFor(m => m.Height, new { @class = "label required" })
+            @Html.TextBoxFor(m => m.Height, new { @class = "textbox-input" })
+            @Html.ValidationMessageFor(m => m.Height, null, new { @class = "message-error" })
+        </div>
+
+        <!--Couple-->
+        <div class="form-element">
+            @Html.LabelFor(m => m.Couple, new { @class = "label" })
+            @Html.TextBoxFor(m => m.Couple, new { @class = "textbox-input" })
+            @Html.ValidationMessageFor(m => m.Couple, null, new { @class = "message-error" })
+        </div>
+
+        <!--Children-->
+        <div class="form-element">
+            @Html.LabelFor(m => m.Children, new { @class = "label" })
+            @Html.TextBoxFor(m => m.Children, new { @class = "textbox-input" })
+            @Html.ValidationMessageFor(m => m.Children, null, new { @class = "message-error" })
+        </div>
+
+        <!--Prize-->
+        <div class="form-element">
+            @Html.LabelFor(m => m.Prize, new { @class = "label" })
+            @Html.TextBoxFor(m => m.Prize, new { @class = "textbox-input" })
+            @Html.ValidationMessageFor(m => m.Prize, null, new { @class = "message-error" })
+        </div>
+
+        <!--Descriptions-->
+        <div class="form-element">
+            @Html.LabelFor(m => m.Descriptions, new { @class = "label" })
+            @Html.TextAreaFor(m => m.Descriptions, new { @class = "textbox-input" })
+            @Html.ValidationMessageFor(m => m.Prize, null, new { @class = "message-error" })
+        </div>
+
+        <div class="form-element">
+            <input type="submit" value="Lưu" id="button-save" class="button" />
+            <a href="@Url.Action("Index", "Actor")" class="button" id="button-cancel">Huỷ bỏ</a>
+        </div>
+    </div>
+
+    <div class="image">
+        <p>
+            <img src="~/Images/no-image.svg" id="display-image"/>
+        </p>
+        <p>
+            <label class="button" id="button-edit">
+                Chọn hình ảnh
+                <input type="file" name="PhotoImg" id="PhotoImg" accept="image/jpeg,image/png" onchange="uploadImage(event)" style="display: none"/>
+            </label>
+        </p>
+    </div>
+    
+}
+

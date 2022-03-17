@@ -5,50 +5,76 @@
     <title>@ViewBag.Title - Quản trị hệ thống</title>
     <link rel="stylesheet" href="~/Content/Administration/main_styles.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/Content/PagedList.css"/>
+    <script src="~/Scripts/Administration/scripts.js"></script>
 </head>
 <body>
 
     <div class="container">
         <!--Sidebar-->
-       <section class="side-bar">
-           <div class="user-container">
-               <div class="avatar">
-                   <img src="~/archives/users/admin-1.png"/>
-               </div>
-               <div class="info">
-                   <h3>Lê Văn Quốc</h3>
-                   <h4>Quản trị viên</h4>
-               </div>
+       <section class="side-bar">      
+           <div class="logo">
+               <a href="@Url.Action("Index", "Home", FormMethod.Post)">
+                   <img src="~/Images/icon.png" width="64" height="64" />
+                   <h1>MoviesRelax.com</h1>
+               </a>
+               
            </div>
+
            <ul class="fa-ul menu">
                <li>
-                   <i class="fa-lg fa-solid fa-house-chimney" style="color: white"></i>
-                   <a href="#">Tổng quát</a>
+                   <a href="#">
+                       <i class="fa-lg fa-solid fa-house-chimney" style="color: white"></i>
+                       Tổng quát
+                   </a>
+               </li>
+               <li class="dropdown">
+                   <a href="#">
+                       <i class="fa-lg fa-solid fa-bars" style="color:white"></i>
+                       Danh mục
+                   </a>
+                   <div class="sub-menu">
+                       <a href="@Url.Action("Index", "MovieGenres")">
+                           <i class="fa-solid fa-film" style="color:white"></i>
+                           Thể loại phim
+                       </a>
+                       <a href="@Url.Action("Index", "Country")">
+                           <i class="fa-solid fa-earth-africa" style="color: white"></i>
+                           Quốc gia
+                       </a>
+                       <a href="@Url.Action("Index", "Actor")">
+                           <i class="fa-solid fa-person" style="color:white"></i>
+                           Diễn viên - Đạo diễn
+                       </a>
+                       <a href="@Url.Action("Index", "SubTitle")">
+                           <i class="fa-solid fa-closed-captioning" style="color:white"></i>
+                            Phụ đề
+                       </a>
+                   </div>
                </li>
                <li>
-                   <i class="fa-lg fa-solid fa-bars" style="color:white"></i>
-                   <a href="#">Danh mục</a>
-                   <ul>
-                       <li><a href="#">Thể loại phim</a></li>
-                       <li><a href="#">Quốc gia</a></li>
-                       <li><a href="#">Diễn viên - Đạo diễn</a></li>
-                   </ul>
+                   <a href="#">
+                       <i class="fa-lg fa-solid fa-clapperboard" style="color: white"></i>
+                       Quản lý phim
+                   </a>
                </li>
                <li>
-                   <i class="fa-lg fa-solid fa-clapperboard" style="color: white"></i>
-                   <a href="#">Quản lý phim</a>
+                   <a href="#">
+                       <i class="fa-lg fa-solid fa-users" style="color: white"></i>
+                       Quản lý người dùng
+                   </a>
                </li>
                <li>
-                   <i class="fa-lg fa-solid fa-users" style="color: white"></i>
-                   <a href="#">Quản lý người dùng</a>
-               </li>
-               <li>
-                   <i class="fa-lg fa-solid fa-elevator" style="color: white"></i>
-                   <a href="#">Phân quyền</a>
+                   <a href="#">
+                       <i class="fa-lg fa-solid fa-elevator" style="color: white"></i>
+                       Phân quyền
+                   </a>
                </li>
                <li class="btn-log-out">
-                   <i class="fa-lg fa-solid fa-right-from-bracket" style="color: white"></i>
-                   <a href="#">Đăng xuất</a>
+                   <a href="#">
+                       <i class="fa-lg fa-solid fa-right-from-bracket" style="color: white"></i>
+                       Đăng xuất
+                   </a>
                </li>
            </ul>
        </section>
@@ -56,7 +82,32 @@
         <!--Home-->
         <section class="home">
             <div class="home-header">
-                <span>Tổng quát</span>
+                <div class="function-name">
+                    <h1>@ViewBag.Title</h1>
+                </div>
+                <div class="search-container">
+                    <input type="search" width="320" placeholder="Nhập nội dung cần tìm..." />
+                </div>
+               
+                @*<nav>
+                    <ul>
+                        <li class="function-name"><h2>Tổng quát</h2></li>
+                        <li class="search-container"><input type="search" width="320" placeholder="Nhập nội dung cần tìm..."/></li>
+                        <li>
+                            <ul class="user-info">
+                                <li><img src="~/archives/users/admin.png" /></li>
+                                <li>
+                                    <a href="#">Lê Văn Quốc</a>
+                                    <ul class="user-menu">
+                                        <li><a href="#">Thông báo</a></li>
+                                        <li><a href="#">Thông tin tài khoản</a></li>
+                                        <li><a href="#">Đăng xuất</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>*@
             </div>
             <div class="home-content">
                 @RenderBody()

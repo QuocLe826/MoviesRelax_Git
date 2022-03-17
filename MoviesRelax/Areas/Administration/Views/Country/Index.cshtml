@@ -1,0 +1,59 @@
+﻿@using MoviesRelax.Models;
+@using PagedList;
+@using PagedList.Mvc;
+
+@model PagedList.IPagedList<MoviesRelax.Models.COUNTRY>
+
+@{
+    ViewBag.Title = "Quốc gia";
+    Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
+}
+
+<div class="button-container">
+    <a href="@Url.Action("AddNew", "Country")" id="button-add" class="button">Thêm mới</a>
+</div>
+<div class="data">
+    @{
+        if (Model == null || Model.Count == 0)
+        {
+            <div class="no-data-image">
+                <img src="~/Images/no-data.png" />
+            </div>
+        }
+        else
+        {
+            <table>
+                <tr>
+                    <th>STT</th>
+                    <th>Quốc gia</th>
+                    <th>Ngày cập nhật</th>
+                    <th></th>
+                </tr>
+
+                @{
+                    for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td class="td-no">@(i + 1)</td>
+                            <td>@Model[i].Name</td>
+                            <td class="td-date">@DateTime.Parse(Model[i].TimeUpdated.ToString()).ToString("dd/MM/yyyy")</td>
+                            <td class="td-button">
+                                @using (Html.BeginForm("Edit", "Country", new { code = Model[i].Code, name = Model[i].Name }, FormMethod.Post, new { @class = "form-edit" }))
+                                {
+                                    <input type="submit" value="Thay đổi" class="button" id="button-edit" />
+                                }
+                                @using (Html.BeginForm("Delete", "Country", new { code = Model[i].Code, name = Model[i].Name, timeCreated = Model[i].TimeCreated, timeUpdated = Model[i].TimeUpdated }, FormMethod.Post, new { @class = "form-delete" }))
+                                {
+                                    <input type="submit" value="Xoá" class="button" id="button-delete" />
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+            <div class="pagination">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            </div>
+        }
+    }
+</div>

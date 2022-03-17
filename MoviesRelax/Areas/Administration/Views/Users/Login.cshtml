@@ -12,41 +12,39 @@
     <link rel="stylesheet" href="~/Content/Administration/login_styles.css"/>
 </head>
 <body>
-    
-    <div class="container">
-        @using (Html.BeginForm("ProcessLogin", "Users", FormMethod.Post))
+
+    @using (Html.BeginForm("ProcessLogin", "Users", FormMethod.Post))
+    {
+        <div class="element" id="title">
+            <img src="~/Images/user-admin.png" width="128" height="128" />
+            <h3>MOVIESRELAX - QUẢN TRỊ</h3>
+        </div>
+        <div class="element">
+            @Html.LabelFor(m => m.Username)
+            @Html.TextBoxFor(m => m.Username)
+            @Html.ValidationMessageFor(m => m.Username, null, new { @class = "message-error" })
+        </div>
+
+        <div class="element">
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password)
+            @Html.ValidationMessageFor(m => m.Password, null, new { @class = "message-error" })
+        </div>
+
+        <div class="element" id="remember-container">
+            @Html.CheckBoxFor(m => m.Remember)
+            @Html.LabelFor(m => m.Remember)
+        </div>
+
+        <div class="element">
+            <input type="submit" value="Đăng nhập" id="btn-login" />
+        </div>
+
+        if (TempData["Message"] != null)
         {
-            <div class="element" id="title">
-                <img src="~/Images/user-admin.png" width="128" height="128" />
-                <h3>MOVIESRELAX - QUẢN TRỊ</h3>
-            </div>
-            <div class="element">
-                @Html.LabelFor(m => m.Username)
-                @Html.TextBoxFor(m => m.Username)
-                @Html.ValidationMessageFor(m => m.Username, null, new { @class = "message-error" })
-            </div>
-
-            <div class="element">
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password, null, new { @class = "message-error" })
-            </div>
-
-            <div class="element" id="remember-container">
-                @Html.CheckBoxFor(m => m.Remember)
-                @Html.LabelFor(m => m.Remember)
-            </div>
-
-            <div class="element">
-                <input type="submit" value="Đăng nhập" id="btn-login" />
-            </div>
-
-            if (TempData["Message"] != null)
-            {
-                <h5 style="text-align: center; margin-top: 8px; color: red">@TempData["Message"]</h5>
-            }
+            <h5 style="text-align: center; margin-top: 8px; color: red">@TempData["Message"]</h5>
         }
-    </div>
+    }
 
 </body>
 </html>

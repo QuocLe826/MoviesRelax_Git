@@ -1,0 +1,88 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@using MoviesRelax.Models;
+@model PagedList.IPagedList<MoviesRelax.Models.ACTOR>
+
+@{
+    ViewBag.Title = "Diễn viên";
+    Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
+}
+
+<div class="button-container">
+    <a href="@Url.Action("AddNew", "Actor")" id="button-add" class="button">Thêm mới</a>
+</div>
+<div class="Model">
+
+    @{
+        if (Model == null || Model.Count == 0)
+        {
+            <div class="no-data-image">
+                <img src="~/Images/no-data.png" />
+            </div>
+        }
+        else
+        {
+            <table>
+                <tr>
+                    <th>STT</th>
+                    <th></th>
+                    <th>Tên diễn viên</th>
+                    <th>Ngày sinh</th>
+                    <th>Nơi sinh</th>
+                    <th>Chiều cao</th>
+                    <th>Vợ/Chồng</th>
+                    <th>Con cái</th>
+                    <th>Giải thưởng</th>
+                    <th>Mô tả</th>
+                    <th>Ngày cập nhật</th>
+                    <th></th>
+                </tr>
+
+                @{
+                    for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td class="td-no">@(i + 1)</td>
+                            <td>
+                                @if (string.IsNullOrEmpty(Model[i].PhotoPath))
+                                {
+                                    <img src="~/Images/no-image.svg" width="64" height="64"/>
+                                }
+                                else
+                                {
+                                    <img src="@Url.Content(Model[i].PhotoPath)" width="64" height="64" style="object-fit:cover"/>
+                                }
+                            </td>
+                            <td>@Model[i].Name</td>
+                            <td>@DateTime.Parse(Model[i].DOB.ToString()).ToString("dd/MM/yyyy")</td>
+                            <td>@Model[i].PlaceOBirth</td>
+                            <td>@Model[i].Height</td>
+                            <td>@Model[i].Couple</td>
+                            <td>@Model[i].Children</td>
+                            <td>@Model[i].Prize</td>
+                            <td class="td-descr">
+                                <pre>
+                                    @Model[i].Descriptions
+                                </pre>
+                            </td>
+                            <td class="td-date">@DateTime.Parse(Model[i].TimeUpdated.ToString()).ToString("dd/MM/yyyy")</td>
+                            <td class="td-button">
+                                @using (Html.BeginForm("Edit", "Actor", new { code = Model[i].Code }, FormMethod.Post, new { @class = "form-edit" }))
+                                {
+                                    <input type="submit" value="Thay đổi" class="button" id="button-edit" />
+                                }
+                                @using (Html.BeginForm("Delete", "Actor", new { code = Model[i].Code }, FormMethod.Post, new { @class = "form-delete" }))
+                                {
+                                    <input type="submit" value="Xoá" class="button" id="button-delete" />
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+            <div class="pagination">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            </div>
+        }
+    }
+</div>

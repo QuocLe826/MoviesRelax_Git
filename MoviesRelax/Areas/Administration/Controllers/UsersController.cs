@@ -1,5 +1,4 @@
-﻿using MoviesRelax.Areas.Administration.Models;
-using MoviesRelax.Models;
+﻿using MoviesRelax.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

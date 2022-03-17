@@ -1,0 +1,22 @@
+﻿@model MoviesRelax.Models.COUNTRY
+
+@{
+    ViewBag.Title = "Thêm mới";
+    Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("SaveData", "Country", new { type = "A"}, FormMethod.Post, new { @class = "form-data-input" }))
+{
+    <h2>Thêm mới</h2>
+    <hr />
+    <div class="form-element">
+        @Html.LabelFor(m => m.Name, new { @class = "label required" })
+        @Html.TextBoxFor(m => m.Name, new { @class = "textbox-input"})
+        @Html.ValidationMessageFor(m => m.Name, null, new { @class = "message-error" })
+    </div>
+    <div class="form-element">
+        <input type="submit" value="Lưu" id="button-save" class="button"/>
+        <a href="@Url.Action("Index", "Country")" class="button" id="button-cancel">Huỷ bỏ</a>
+    </div>
+}
+

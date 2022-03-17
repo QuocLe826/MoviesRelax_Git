@@ -1,0 +1,32 @@
+﻿@model MoviesRelax.Models.COUNTRY
+
+@{
+    ViewBag.Title = "Xoá dữ liệu";
+    Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("DeleteData", "Country", FormMethod.Post, new { @class = "form-data-input" }))
+{
+    @Html.HiddenFor(m => m.Code)
+    <div class="form-element">
+        @Html.LabelFor(m => m.Code, new { @class = "label" })
+        @Html.TextBoxFor(m => m.Code, new { @class = "textbox-input", @readonly = "readonly" })
+    </div>
+    <div class="form-element">
+        @Html.LabelFor(m => m.Name, new { @class = "label" })
+        @Html.TextBoxFor(m => m.Name, new { @class = "textbox-input", @readonly = "readonly" })
+    </div>
+    <div class="form-element">
+        @Html.LabelFor(m => m.TimeCreated, new { @class = "label" })
+        @Html.TextBoxFor(m => m.TimeCreated, new { @class = "textbox-input", @readonly = "readonly" })
+    </div>
+    <div class="form-element">
+        @Html.LabelFor(m => m.TimeUpdated, new { @class = "label" })
+        @Html.TextBoxFor(m => m.TimeUpdated, new { @class = "textbox-input", @readonly = "readonly" })
+    </div>
+    <div class="form-element">
+        <input type="submit" value="Xác nhận" id="button-save" class="button" />
+        <a href="@Url.Action("Index", "Country")" class="button" id="button-cancel">Huỷ bỏ</a>
+    </div>
+}
+

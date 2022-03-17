@@ -39,4 +39,102 @@ CREATE TABLE [dbo].[USER_LOGIN] (
     [Status] nvarchar(max)  NOT NULL,
     [Message] nvarchar(max)  NOT NULL
 );
+GO
 
+CREATE TABLE MOVIE_GENRES
+(
+	Code varchar(20) primary key not null,
+	Name nvarchar(254),
+	TimeCreated datetime,
+	TimeUpdated datetime
+)
+GO
+
+CREATE TABLE ACTORS
+(
+	Code varchar(20) primary key not null,
+	Name nvarchar(254),
+	DOB datetime,
+	PlaceOBirth nvarchar(254),
+	Height varchar(6),
+	Couple nvarchar(254),
+	Children nvarchar(254),
+	Prize nvarchar(254),
+	Descriptions nvarchar(max),
+	PhotoPath varchar(max),
+	TimeCreated datetime,
+	TimeUpdated datetime
+)
+GO
+
+CREATE TABLE DIRECTORS
+(
+	Code varchar(20) primary key not null,
+	Name nvarchar(254),
+	DOB datetime,
+	PlaceOBirth nvarchar(254),
+	Height varchar(6),
+	Couple nvarchar(254),
+	Children nvarchar(254),
+	Prize nvarchar(254),
+	Descriptions nvarchar(max),
+	PhotoPath varchar(max),
+	TimeCreated datetime,
+	TimeUpdated datetime
+)
+GO
+
+CREATE TABLE SUBTITLES
+(
+	Code varchar(20) primary key not null,
+	Name nvarchar(254),
+	TimeCreated datetime,
+	TimeUpdated datetime
+)
+GO
+
+CREATE TABLE MOVIES_INFO
+(
+	Code varchar(20) primary key not null,
+	Name nvarchar(254),
+	DirectorsCode ntext,
+	ActorsCode ntext,
+	GenresCode ntext,
+	SubtitlesCode ntext,
+	CountryCode varchar(20),
+	ReleaseTime int,
+	MovieTime int,
+	IMDbScrore decimal(1,1),
+	TimeCreated datetime,
+	TimeUpdated datetime
+)
+
+CREATE TABLE MOVIE_TRAILERS
+(
+	Code varchar(20) primary key not null,
+	MovieCode varchar(20),
+	Name nvarchar(254),
+	Path nvarchar(max),
+	TimeCreated datetime,
+	TimeUpdated datetime
+)
+
+CREATE TABLE MOVIE_LIKES
+(
+	Code varchar(20) primary key not null,
+	MovieCode varchar(20),
+	Username varchar(40),
+	LikeNum int,
+	TimeCreated datetime,
+	TimeUpdated datetime
+)
+
+CREATE TABLE MOVIE_COMMENTS
+(
+	Code varchar(20) primary key not null,
+	MovieCode varchar(20),
+	Username varchar(40),
+	Comments nvarchar(max),
+	TimeCreated datetime,
+	TimeUpdated datetime
+)

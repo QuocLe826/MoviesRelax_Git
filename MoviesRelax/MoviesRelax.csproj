@@ -26,6 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,8 +54,15 @@
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -62,12 +70,9 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -111,6 +116,7 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -130,12 +136,28 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
+    <Compile Include="Areas\Administration\Controllers\ActorController.cs" />
+    <Compile Include="Areas\Administration\Controllers\CountryController.cs" />
     <Compile Include="Areas\Administration\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Administration\Controllers\MovieGenresController.cs" />
     <Compile Include="Areas\Administration\Controllers\UsersController.cs" />
-    <Compile Include="Areas\Administration\Models\UsersModel.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ACTOR.cs">
+      <DependentUpon>MoviesRelaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Administration\ActorModel.cs" />
+    <Compile Include="Models\Administration\CountryModel.cs" />
+    <Compile Include="Models\Administration\EntityModel.cs" />
+    <Compile Include="Models\Administration\MovieGenreModel.cs" />
+    <Compile Include="Models\Administration\UsersModel.cs" />
+    <Compile Include="Models\COUNTRY.cs">
+      <DependentUpon>MoviesRelaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DIRECTOR.cs">
+      <DependentUpon>MoviesRelaxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MoviesRelaxModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -151,6 +173,24 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MoviesRelaxModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MOVIES_INFO.cs">
+      <DependentUpon>MoviesRelaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MOVIE_COMMENTS.cs">
+      <DependentUpon>MoviesRelaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MOVIE_GENRE.cs">
+      <DependentUpon>MoviesRelaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MOVIE_LIKES.cs">
+      <DependentUpon>MoviesRelaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MOVIE_TRAILERS.cs">
+      <DependentUpon>MoviesRelaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SUBTITLE.cs">
+      <DependentUpon>MoviesRelaxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\USER.cs">
       <DependentUpon>MoviesRelaxModel.tt</DependentUpon>
@@ -173,6 +213,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -181,6 +222,9 @@
     <Content Include="Images\background-admin.jpg" />
     <Content Include="Images\code-square.svg" />
     <Content Include="Images\film.svg" />
+    <Content Include="Images\icon.png" />
+    <Content Include="Images\no-data.png" />
+    <Content Include="Images\no-image.svg" />
     <Content Include="Images\people-fill.svg" />
     <Content Include="Images\tag-fill.svg" />
     <Content Include="Images\user-admin.png" />
@@ -194,6 +238,7 @@
       <DependentUpon>MoviesRelaxModel.edmx</DependentUpon>
       <LastGenOutput>MoviesRelaxModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\Administration\scripts.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\MoviesRelaxModel.edmx">
@@ -207,6 +252,18 @@
     <Content Include="Areas\Administration\Views\Users\Login.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Administration\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\MovieGenres\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\MovieGenres\AddNew.cshtml" />
+    <Content Include="Areas\Administration\Views\Actor\AddNew.cshtml" />
+    <Content Include="Areas\Administration\Views\MovieGenres\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\MovieGenres\Delete.cshtml" />
+    <Content Include="Areas\Administration\Views\Country\AddNew.cshtml" />
+    <Content Include="Areas\Administration\Views\Country\Delete.cshtml" />
+    <Content Include="Areas\Administration\Views\Country\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Country\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Actor\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Actor\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Actor\Delete.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -235,6 +292,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Administration\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

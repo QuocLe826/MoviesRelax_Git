@@ -1,0 +1,23 @@
+﻿@model MoviesRelax.Models.MOVIE_GENRE
+
+@{
+    ViewBag.Title = "Cập nhật thông tin";
+    Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("SaveData", "MovieGenres", new { type = "U"}, FormMethod.Post, new { @class = "form-data-input" }))
+{
+    <h2>Cập nhật thông tin</h2>
+    <hr />
+    <div class="form-element">
+        @Html.HiddenFor(m => m.Code)
+        @Html.LabelFor(m => m.Name, new { @class = "label required" })
+        @Html.TextBoxFor(m => m.Name, new { @class = "textbox-input"})
+        @Html.ValidationMessageFor(m => m.Name, null, new { @class = "message-error" })
+    </div>
+    <div class="form-element">
+        <input type="submit" value="Lưu" id="button-save" class="button"/>
+        <a href="@Url.Action("Index", "MovieGenres")" class="button" id="button-cancel">Huỷ bỏ</a>
+    </div>
+}
+

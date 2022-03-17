@@ -5,6 +5,118 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MOVIES_RELAXModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACTORS">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="254" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="PlaceOBirth" Type="nvarchar" MaxLength="254" />
+          <Property Name="Height" Type="varchar" MaxLength="6" />
+          <Property Name="Couple" Type="nvarchar" MaxLength="254" />
+          <Property Name="Children" Type="nvarchar" MaxLength="254" />
+          <Property Name="Prize" Type="nvarchar" MaxLength="254" />
+          <Property Name="Descriptions" Type="nvarchar(max)" />
+          <Property Name="PhotoPath" Type="varchar(max)" />
+          <Property Name="TimeCreated" Type="datetime" />
+          <Property Name="TimeUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="COUNTRIES">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="254" />
+          <Property Name="TimeCreated" Type="datetime" />
+          <Property Name="TimeUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DIRECTORS">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="254" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="PlaceOBirth" Type="nvarchar" MaxLength="254" />
+          <Property Name="Height" Type="varchar" MaxLength="6" />
+          <Property Name="Couple" Type="nvarchar" MaxLength="254" />
+          <Property Name="Children" Type="nvarchar" MaxLength="254" />
+          <Property Name="Prize" Type="nvarchar" MaxLength="254" />
+          <Property Name="Descriptions" Type="nvarchar(max)" />
+          <Property Name="PhotoPath" Type="varchar(max)" />
+          <Property Name="TimeCreated" Type="datetime" />
+          <Property Name="TimeUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MOVIE_COMMENTS">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="MovieCode" Type="varchar" MaxLength="20" />
+          <Property Name="Username" Type="varchar" MaxLength="40" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+          <Property Name="TimeCreated" Type="datetime" />
+          <Property Name="TimeUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MOVIE_GENRES">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="254" />
+          <Property Name="TimeCreated" Type="datetime" />
+          <Property Name="TimeUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MOVIE_LIKES">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="MovieCode" Type="varchar" MaxLength="20" />
+          <Property Name="Username" Type="varchar" MaxLength="40" />
+          <Property Name="LikeNum" Type="int" />
+          <Property Name="TimeCreated" Type="datetime" />
+          <Property Name="TimeUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MOVIE_TRAILERS">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="MovieCode" Type="varchar" MaxLength="20" />
+          <Property Name="Name" Type="nvarchar" MaxLength="254" />
+          <Property Name="Path" Type="nvarchar(max)" />
+          <Property Name="TimeCreated" Type="datetime" />
+          <Property Name="TimeUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MOVIES_INFO">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="254" />
+          <Property Name="DirectorsCode" Type="ntext" />
+          <Property Name="ActorsCode" Type="ntext" />
+          <Property Name="GenresCode" Type="ntext" />
+          <Property Name="SubtitlesCode" Type="ntext" />
+          <Property Name="CountryCode" Type="varchar" MaxLength="20" />
+          <Property Name="ReleaseTime" Type="int" />
+          <Property Name="MovieTime" Type="int" />
+          <Property Name="IMDbScrore" Type="decimal" Precision="1" Scale="1" />
+          <Property Name="PhotoPath" Type="nvarchar(max)" />
+          <Property Name="TimeCreated" Type="datetime" />
+          <Property Name="TimeUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SUBTITLES">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="254" />
+          <Property Name="TimeCreated" Type="datetime" />
+          <Property Name="TimeUpdated" Type="datetime" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'MOVIES_RELAX.dbo.USER_LOGIN' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="USER_LOGIN">
@@ -47,6 +159,15 @@ warning 6002: The table/view 'MOVIES_RELAX.dbo.USER_LOGIN' does not have a prima
           <Property Name="TimeUpdated" Type="datetime" />
         </EntityType>
         <EntityContainer Name="MOVIES_RELAXModelStoreContainer">
+          <EntitySet Name="ACTORS" EntityType="Self.ACTORS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COUNTRIES" EntityType="Self.COUNTRIES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DIRECTORS" EntityType="Self.DIRECTORS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MOVIE_COMMENTS" EntityType="Self.MOVIE_COMMENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MOVIE_GENRES" EntityType="Self.MOVIE_GENRES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MOVIE_LIKES" EntityType="Self.MOVIE_LIKES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MOVIE_TRAILERS" EntityType="Self.MOVIE_TRAILERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MOVIES_INFO" EntityType="Self.MOVIES_INFO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUBTITLES" EntityType="Self.SUBTITLES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_TYPES" EntityType="Self.USER_TYPES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_LOGIN" EntityType="Self.USER_LOGIN" store:Type="Tables" store:Schema="dbo">
@@ -83,6 +204,15 @@ warning 6002: The table/view 'MOVIES_RELAX.dbo.USER_LOGIN' does not have a prima
           <EntitySet Name="USERS" EntityType="Self.USER" />
           <EntitySet Name="USER_LOGIN" EntityType="MOVIES_RELAXModel.USER_LOGIN" />
           <EntitySet Name="USER_TYPES" EntityType="MOVIES_RELAXModel.USER_TYPES" />
+          <EntitySet Name="MOVIE_GENRE" EntityType="MOVIES_RELAXModel.MOVIE_GENRE" />
+          <EntitySet Name="COUNTRIES" EntityType="MOVIES_RELAXModel.COUNTRY" />
+          <EntitySet Name="ACTORS" EntityType="MOVIES_RELAXModel.ACTOR" />
+          <EntitySet Name="DIRECTORS" EntityType="MOVIES_RELAXModel.DIRECTOR" />
+          <EntitySet Name="MOVIE_COMMENTS" EntityType="MOVIES_RELAXModel.MOVIE_COMMENTS" />
+          <EntitySet Name="MOVIE_LIKES" EntityType="MOVIES_RELAXModel.MOVIE_LIKES" />
+          <EntitySet Name="MOVIE_TRAILERS" EntityType="MOVIES_RELAXModel.MOVIE_TRAILERS" />
+          <EntitySet Name="MOVIES_INFO" EntityType="MOVIES_RELAXModel.MOVIES_INFO" />
+          <EntitySet Name="SUBTITLES" EntityType="MOVIES_RELAXModel.SUBTITLE" />
         </EntityContainer>
         <EntityType Name="USER_LOGIN">
           <Key>
@@ -95,6 +225,118 @@ warning 6002: The table/view 'MOVIES_RELAX.dbo.USER_LOGIN' does not have a prima
           <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
         <EntityType Name="USER_TYPES">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="TimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="TimeUpdated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="MOVIE_GENRE">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="TimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="TimeUpdated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="COUNTRY">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="TimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="TimeUpdated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ACTOR">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="PlaceOBirth" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Height" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
+          <Property Name="Couple" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Children" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Prize" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Descriptions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="TimeUpdated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="DIRECTOR">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="PlaceOBirth" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Height" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Couple" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Children" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Prize" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Descriptions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="TimeUpdated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="MOVIE_COMMENTS">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MovieCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="TimeUpdated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="MOVIE_LIKES">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MovieCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="LikeNum" Type="Int32" />
+          <Property Name="TimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="TimeUpdated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="MOVIE_TRAILERS">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MovieCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="TimeUpdated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="MOVIES_INFO">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="DirectorsCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ActorsCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GenresCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubtitlesCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CountryCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ReleaseTime" Type="Int32" />
+          <Property Name="MovieTime" Type="Int32" />
+          <Property Name="IMDbScrore" Type="Decimal" Precision="1" Scale="1" />
+          <Property Name="PhotoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="TimeUpdated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SUBTITLE">
           <Key>
             <PropertyRef Name="Code" />
           </Key>
@@ -140,6 +382,127 @@ warning 6002: The table/view 'MOVIES_RELAX.dbo.USER_LOGIN' does not have a prima
           <EntitySetMapping Name="USER_TYPES">
             <EntityTypeMapping TypeName="MOVIES_RELAXModel.USER_TYPES">
               <MappingFragment StoreEntitySet="USER_TYPES">
+                <ScalarProperty Name="TimeUpdated" ColumnName="TimeUpdated" />
+                <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MOVIE_GENRE">
+            <EntityTypeMapping TypeName="MOVIES_RELAXModel.MOVIE_GENRE">
+              <MappingFragment StoreEntitySet="MOVIE_GENRES">
+                <ScalarProperty Name="TimeUpdated" ColumnName="TimeUpdated" />
+                <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COUNTRIES">
+            <EntityTypeMapping TypeName="MOVIES_RELAXModel.COUNTRY">
+              <MappingFragment StoreEntitySet="COUNTRIES">
+                <ScalarProperty Name="TimeUpdated" ColumnName="TimeUpdated" />
+                <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACTORS">
+            <EntityTypeMapping TypeName="MOVIES_RELAXModel.ACTOR">
+              <MappingFragment StoreEntitySet="ACTORS">
+                <ScalarProperty Name="TimeUpdated" ColumnName="TimeUpdated" />
+                <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
+                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+                <ScalarProperty Name="Prize" ColumnName="Prize" />
+                <ScalarProperty Name="Children" ColumnName="Children" />
+                <ScalarProperty Name="Couple" ColumnName="Couple" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="PlaceOBirth" ColumnName="PlaceOBirth" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIRECTORS">
+            <EntityTypeMapping TypeName="MOVIES_RELAXModel.DIRECTOR">
+              <MappingFragment StoreEntitySet="DIRECTORS">
+                <ScalarProperty Name="TimeUpdated" ColumnName="TimeUpdated" />
+                <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
+                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+                <ScalarProperty Name="Prize" ColumnName="Prize" />
+                <ScalarProperty Name="Children" ColumnName="Children" />
+                <ScalarProperty Name="Couple" ColumnName="Couple" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="PlaceOBirth" ColumnName="PlaceOBirth" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MOVIE_COMMENTS">
+            <EntityTypeMapping TypeName="MOVIES_RELAXModel.MOVIE_COMMENTS">
+              <MappingFragment StoreEntitySet="MOVIE_COMMENTS">
+                <ScalarProperty Name="TimeUpdated" ColumnName="TimeUpdated" />
+                <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="MovieCode" ColumnName="MovieCode" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MOVIE_LIKES">
+            <EntityTypeMapping TypeName="MOVIES_RELAXModel.MOVIE_LIKES">
+              <MappingFragment StoreEntitySet="MOVIE_LIKES">
+                <ScalarProperty Name="TimeUpdated" ColumnName="TimeUpdated" />
+                <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
+                <ScalarProperty Name="LikeNum" ColumnName="LikeNum" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="MovieCode" ColumnName="MovieCode" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MOVIE_TRAILERS">
+            <EntityTypeMapping TypeName="MOVIES_RELAXModel.MOVIE_TRAILERS">
+              <MappingFragment StoreEntitySet="MOVIE_TRAILERS">
+                <ScalarProperty Name="TimeUpdated" ColumnName="TimeUpdated" />
+                <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MovieCode" ColumnName="MovieCode" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MOVIES_INFO">
+            <EntityTypeMapping TypeName="MOVIES_RELAXModel.MOVIES_INFO">
+              <MappingFragment StoreEntitySet="MOVIES_INFO">
+                <ScalarProperty Name="TimeUpdated" ColumnName="TimeUpdated" />
+                <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
+                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
+                <ScalarProperty Name="IMDbScrore" ColumnName="IMDbScrore" />
+                <ScalarProperty Name="MovieTime" ColumnName="MovieTime" />
+                <ScalarProperty Name="ReleaseTime" ColumnName="ReleaseTime" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="SubtitlesCode" ColumnName="SubtitlesCode" />
+                <ScalarProperty Name="GenresCode" ColumnName="GenresCode" />
+                <ScalarProperty Name="ActorsCode" ColumnName="ActorsCode" />
+                <ScalarProperty Name="DirectorsCode" ColumnName="DirectorsCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUBTITLES">
+            <EntityTypeMapping TypeName="MOVIES_RELAXModel.SUBTITLE">
+              <MappingFragment StoreEntitySet="SUBTITLES">
                 <ScalarProperty Name="TimeUpdated" ColumnName="TimeUpdated" />
                 <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
