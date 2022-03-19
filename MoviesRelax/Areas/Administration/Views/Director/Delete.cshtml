@@ -1,11 +1,11 @@
-﻿@model MoviesRelax.Models.ACTOR
+﻿@model MoviesRelax.Models.DIRECTOR
 
 @{
     ViewBag.Title = "Xoá dữ liệu";
     Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("DeleteData", "Actor", FormMethod.Post, new { name = "frm-add-actor", enctype = "multipart/form-data", @class = "form-data-input" }))
+@using (Html.BeginForm("DeleteData", "Director", FormMethod.Post, new { name = "frm-delete-director", enctype = "multipart/form-data", @class = "form-data-input" }))
 {
     <div class="text">
 
@@ -29,7 +29,6 @@
                 @Html.LabelFor(m => m.PlaceOBirth, new { @class = "label required" })
                 @Html.TextBoxFor(m => m.PlaceOBirth, new { @class = "textbox-control", @readonly = "readonly" })
             </div>
-
         </div>
 
         <!--Height-->
@@ -65,7 +64,7 @@
         <div class="form-element">
             <p class="buttons">
                 <input type="submit" value="Xác nhận" id="button-confirm" class="button" />
-                <a href="@Url.Action("Index", "Actor")" class="button" id="button-cancel">Huỷ bỏ</a>
+                <a href="@Url.Action("Index", "Director")" class="button" id="button-cancel">Huỷ bỏ</a>
             </p>
         </div>
     </div>
@@ -86,3 +85,4 @@
     </div>
     
 }
+

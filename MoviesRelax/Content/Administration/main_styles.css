@@ -41,11 +41,10 @@ th, td {
     text-align: left;
     padding: 16px;
     white-space: nowrap;
-
 }
 
 th {
-    color: #ADB0C0; 
+    color: #ADB0C0;
     padding: 10px;
     font-size: 14px;
 }
@@ -120,14 +119,14 @@ tr:last-child td {
 
 
 #button-save {
-    border: 1px solid #00a8ff;
-    background-color: #00a8ff;
+    border: 1px solid #2ecc71;
+    background-color: #2ecc71;
     padding: 9px 18px;
 }
 
 #button-save:hover {
-    border: 1px solid #0097e6;
-    background-color: #0097e6;
+    border: 1px solid #27ae60;
+    background-color: #27ae60;
 }
 
 #button-cancel {
@@ -137,8 +136,19 @@ tr:last-child td {
 }
 
 #button-cancel:hover {
-    border: 1px solid #c23616;
-    background-color: #c23616;
+    border: 1px solid #c0392b;
+    background-color: #c0392b;
+}
+
+#button-confirm {
+    padding: 9px 18px;
+    border: 1px solid #3498db;
+    background-color: #3498db;
+}
+
+#button-confirm:hover {
+    border: 1px solid #2980b9;
+    background-color: #2980b9;
 }
 
 .form-data-input {
@@ -153,6 +163,10 @@ tr:last-child td {
     box-sizing: border-box;
 }
 
+.form-data-input .form-element .buttons {
+    float: right;
+}
+
 .form-data-input .form-element .form-child-element {
     margin-right: 5px;
     display: inline-block;
@@ -160,6 +174,12 @@ tr:last-child td {
 
 .form-data-input .form-element .form-child-element#place-birth {
     width: 468px;
+}
+
+.form-data-input h2 {
+    margin-bottom: 8px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
 }
 
 .form-data-input .text {
@@ -177,11 +197,12 @@ tr:last-child td {
 }
 
 .form-data-input .image img {
+   
     border-radius: 4px;
     width: 100%;
 }
 
-.textbox-input {
+.textbox-control {
     box-sizing: border-box;
     width: 100%;
     padding: 12px 12px;
@@ -191,7 +212,22 @@ tr:last-child td {
     margin-bottom: 4px;
 }
 
-.date-input {
+.dropdown-control {
+    width: 150px;
+    box-sizing: border-box;
+    padding: 12px 12px;
+    border: 1px solid #ddd;
+    outline: none;
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+
+.dropdown-control option {
+    font-size: 14px;
+    padding: 12px 10px;
+}
+
+.date-control {
     box-sizing: border-box;
     width: 180px;
     padding: 10px 12px;
@@ -248,6 +284,7 @@ body {
     width: 20%;
     height: 100%;
     background-color: #263544;
+    overflow: scroll;
 }
 
 .side-bar .logo {
@@ -284,7 +321,8 @@ body {
     
 }*/
 
-.side-bar .menu li a {
+.side-bar .menu li a, 
+.side-bar .menu li button {
     padding: 18px 12px;
     color: #f5f6fa;
     display: block;
@@ -293,17 +331,17 @@ body {
     color: #fff;
 }
 
-.side-bar .menu li a:hover {
-    font-weight: 600;
+.side-bar .menu li button #bar {
+    margin-right: 12px;
+}
+
+.side-bar .menu li a:hover,
+.side-bar .menu li button:hover {
     background-color: #706fd3;
 }
 
-.dropdown:hover .sub-menu {
-    display: block;
-}
-
 .side-bar .menu li a i,
-.side-bar .menu .dropdown .sub-menu a i {
+.side-bar .menu .dropdown-li .sub-menu a i {
     margin: 8px 10px 0 0;
 }
 
@@ -313,14 +351,44 @@ body {
     display: none;
 }
 
-.side-bar .menu li:active ul {
+.side-bar .menu li button:active ul {
     display: block;
 }
 
 .sub-menu {
-    display: none;
+    /*padding-left: 24px;*/
+    display: block;
     position: relative;
     background-color: #263544;
+}
+
+.sub-menu a p {
+    margin-left: 24px;
+}
+
+.dropdown {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+
+.active {
+    background-color: #706fd3;
 }
 
 .home {

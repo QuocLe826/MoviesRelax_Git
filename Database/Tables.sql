@@ -20,17 +20,20 @@ CREATE TABLE USERS
 (
 	Code varchar(20) primary key not null,
 	FullName nvarchar(254),
+	Email varchar(254),
 	Username varchar(40),
 	Password varchar(500),
 	UserType varchar(20),
 	Auth nvarchar(max),
-	AvatarPath nvarchar(max),
+	PhotoPath nvarchar(max),
 	Status varchar(1),
 	LastLogin datetime,
 	TimeCreated datetime,
 	TimeUpdated datetime
 )
 GO
+
+
 
 CREATE TABLE [dbo].[USER_LOGIN] (
     [Id] int IDENTITY(1,1) NOT NULL,
@@ -50,6 +53,15 @@ CREATE TABLE MOVIE_GENRES
 )
 GO
 
+CREATE TABLE MOVIE_ROLES
+(
+	Code varchar(20) primary key not null,
+	Name nvarchar(254),
+	TimeCreated datetime,
+	TimeUpdated datetime
+)
+GO
+
 CREATE TABLE ACTORS
 (
 	Code varchar(20) primary key not null,
@@ -61,6 +73,7 @@ CREATE TABLE ACTORS
 	Children nvarchar(254),
 	Prize nvarchar(254),
 	Descriptions nvarchar(max),
+	RoleCode varchar(20),
 	PhotoPath varchar(max),
 	TimeCreated datetime,
 	TimeUpdated datetime
@@ -78,6 +91,7 @@ CREATE TABLE DIRECTORS
 	Children nvarchar(254),
 	Prize nvarchar(254),
 	Descriptions nvarchar(max),
+	RoleCode varchar(20),
 	PhotoPath varchar(max),
 	TimeCreated datetime,
 	TimeUpdated datetime
@@ -105,6 +119,7 @@ CREATE TABLE MOVIES_INFO
 	ReleaseTime int,
 	MovieTime int,
 	IMDbScrore decimal(1,1),
+	PhotoPath nvarchar(max),
 	TimeCreated datetime,
 	TimeUpdated datetime
 )

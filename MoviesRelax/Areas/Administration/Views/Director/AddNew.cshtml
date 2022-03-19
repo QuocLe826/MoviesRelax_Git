@@ -1,19 +1,17 @@
-﻿@model MoviesRelax.Models.ACTOR
+﻿@model MoviesRelax.Models.DIRECTOR
 
 @{
     ViewBag.Title = "Thêm mới";
     Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("SaveData", "Actor", new { type = "A" }, FormMethod.Post, new { name = "frm-add-actor", enctype = "multipart/form-data", @class = "form-data-input" }))
+@using (Html.BeginForm("SaveData", "Director", new { type = "A" }, FormMethod.Post, new { name = "frm-add-director", enctype = "multipart/form-data", @class = "form-data-input" }))
 {
-  
     <div class="text">
-
         <!--Name-->
         <div class="form-element">
             @Html.LabelFor(m => m.Name, new { @class = "label required" })
-            @Html.TextBoxFor(m => m.Name, new { @class = "textbox-control", @placeholder = "Nhập tên diễn viên" })
+            @Html.TextBoxFor(m => m.Name, new { @class = "textbox-control", @placeholder = "Nhập tên đạo diễn" })
             @Html.ValidationMessageFor(m => m.Name, null, new { @class = "message-error" })
         </div>
 
@@ -73,7 +71,7 @@
         <div class="form-element">
             <p class="buttons">
                 <input type="submit" value="Lưu" id="button-save" class="button" />
-                <a href="@Url.Action("Index", "Actor")" class="button" id="button-cancel">Huỷ bỏ</a>
+                <a href="@Url.Action("Index", "Director")" class="button" id="button-cancel">Huỷ bỏ</a>
             </p>
         </div>
     </div>

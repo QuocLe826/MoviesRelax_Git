@@ -1,0 +1,68 @@
+﻿@model MoviesRelax.Models.USER
+
+@{
+    ViewBag.Title = "Thêm mới";
+    Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
+    var lst = ViewData["UserTypes"] as List<SelectListItem>;
+}
+
+@using (Html.BeginForm("SaveData", "Users", new { type = "A" }, FormMethod.Post, new { @class = "form-data-input", enctype = "multipart/form-data" }))
+{
+    <div class="text">
+        <div class="form-element">
+            @Html.LabelFor(m => m.FullName, new { @class = "label required" })
+            @Html.TextBoxFor(m => m.FullName, new { @class = "textbox-control" })
+            @Html.ValidationMessageFor(m => m.FullName, null, new { @class = "message-error" })
+        </div>
+
+        <div class="form-element">
+            @Html.LabelFor(m => m.Email, new { @class = "label required" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "textbox-control" })
+            @Html.ValidationMessageFor(m => m.Email, null, new { @class = "message-error" })
+        </div>
+
+        <div class="form-element">
+            @Html.LabelFor(m => m.Username, new { @class = "label required" })
+            @Html.TextBoxFor(m => m.Username, new { @class = "textbox-control" })
+            @Html.ValidationMessageFor(m => m.Username, null, new { @class = "message-error" })
+        </div>
+
+        <div class="form-element">
+            @Html.LabelFor(m => m.Password, new { @class = "label required" })
+            @Html.PasswordFor(m => m.Password, new { @class = "textbox-control" })
+            @Html.ValidationMessageFor(m => m.Password, null, new { @class = "message-error" })
+        </div>
+
+        <div class="form-element">
+            @Html.LabelFor(m => m.UserType, new { @class = "label required" })
+            @Html.DropDownListFor(m => m.UserType, lst, new { @class = "dropdown-control" })
+            @Html.ValidationMessageFor(m => m.UserType, null, new { @class = "message-error" })
+        </div>
+
+        <div class="form-element">
+            @Html.LabelFor(m => m.Auth, new { @class = "label required" })
+            @Html.TextBoxFor(m => m.Auth, new { @class = "textbox-control" })
+            @Html.ValidationMessageFor(m => m.Auth, null, new { @class = "message-error" })
+        </div>
+
+        <div class="form-element">
+            <p class="buttons">
+                <input type="submit" value="Lưu" id="button-save" class="button" />
+                <a href="@Url.Action("Index", "Users")" class="button" id="button-cancel">Huỷ bỏ</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="image">
+        <p>
+            <img src="~/Images/no-image.svg" id="display-image" />
+        </p>
+        <p>
+            <label class="button" id="button-edit">
+                Chọn hình ảnh
+                <input type="file" name="PhotoImg" id="PhotoImg" accept="image/jpeg,image/png" onchange="uploadImage(event)" style="display: none" />
+            </label>
+        </p>
+    </div>
+}
+

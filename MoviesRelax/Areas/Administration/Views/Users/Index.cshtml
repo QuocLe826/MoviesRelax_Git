@@ -1,0 +1,92 @@
+﻿@using MoviesRelax.Models;
+@using PagedList;
+@using PagedList.Mvc;
+
+@model PagedList.IPagedList<MoviesRelax.Models.USER>
+
+@{
+    ViewBag.Title = "Quản lý người dùng";
+    Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
+}
+
+<div class="button-container">
+    <a href="@Url.Action("AddNew", "Users")" id="button-add" class="button">Thêm mới</a>
+</div>
+<div class="data">
+    @{
+        if (Model == null || Model.Count == 0)
+        {
+            <div class="no-data-image">
+                <img src="~/Images/no-data.png" />
+            </div>
+        }
+        else
+        {
+            <table>
+                <tr>
+                    <th>STT</th>
+                    <th></th>
+                    <th>Họ tên</th>
+                    <th>Email</th>
+                    <th>Tên đăng nhập</th>
+                    <th>Mật khẩu</th>
+                    <th>Phân quyền</th>
+                    <th>Trạng thái</th>
+                    <th>Đăng nhập lần cuối</th>
+                    <th>Ngày cập nhật</th>
+                    <th></th>
+                </tr>
+
+                @{
+                    for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td class="td-no">@(i + 1)</td>
+                            <td>
+                                @if (string.IsNullOrEmpty(Model[i].PhotoPath))
+                                {
+                                    <img src="~/Images/no-image.svg" width="64" height="64" />
+                                }
+                                else
+                                {
+                                    <img src="@Url.Content(Model[i].PhotoPath)" width="64" height="64" style="object-fit:cover" />
+                                }
+                            </td>
+                            <td>@Model[i].FullName</td>
+                            <td>@Model[i].Email</td>
+                            <td>@Model[i].Username</td>
+                            <td>@Model[i].Password</td>
+                            <td>@Model[i].Auth</td>
+                            <td>@Model[i].Status</td>
+                            @{
+                                if (!string.IsNullOrEmpty(Model[i].LastLogin.ToString()))
+                                {
+                                    <td>@DateTime.Parse(Model[i].LastLogin.ToString()).ToString("dd/MM/yyyy HH:mm:ss")</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                            }
+                            <td class="td-date">@DateTime.Parse(Model[i].TimeUpdated.ToString()).ToString("dd/MM/yyyy")</td>
+
+                            <td class="td-button">
+                                @using (Html.BeginForm("Edit", "Users", new { code = Model[i].Code }, FormMethod.Post, new { @class = "form-edit" }))
+                                {
+                                    <input type="submit" value="Thay đổi" class="button" id="button-edit" />
+                                }
+                                @using (Html.BeginForm("Delete", "Users", new { code = Model[i].Code }, FormMethod.Post, new { @class = "form-delete" }))
+                                {
+                                    <input type="submit" value="Xoá" class="button" id="button-delete" />
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+            <div class="pagination">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            </div>
+        }
+    }
+</div>

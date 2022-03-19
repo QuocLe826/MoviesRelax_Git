@@ -1,11 +1,11 @@
-﻿@model MoviesRelax.Models.MOVIE_GENRE
+﻿@model MoviesRelax.Models.SUBTITLE
 
 @{
     ViewBag.Title = "Thêm mới";
     Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("SaveData", "MovieGenres", new { type = "A"}, FormMethod.Post, new { @class = "form-data-input" }))
+@using (Html.BeginForm("SaveData", "SubTitle", new { type = "A"}, FormMethod.Post, new { @class = "form-data-input" }))
 {
     <div class="form-element">
         @Html.LabelFor(m => m.Name, new { @class = "label required" })
@@ -15,7 +15,7 @@
     <div class="form-element">
         <p class="buttons">
             <input type="submit" value="Lưu" id="button-save" class="button" />
-            <a href="@Url.Action("Index", "MovieGenres")" class="button" id="button-cancel">Huỷ bỏ</a>
+            <a href="@Url.Action("Index", "SubTitle")" class="button" id="button-cancel">Huỷ bỏ</a>
         </p>
     </div>
 }

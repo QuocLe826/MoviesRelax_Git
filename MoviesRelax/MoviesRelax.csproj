@@ -136,6 +136,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
+    <Compile Include="Areas\Administration\Controllers\SubTitleController.cs" />
+    <Compile Include="Areas\Administration\Controllers\DirectorController.cs" />
     <Compile Include="Areas\Administration\Controllers\ActorController.cs" />
     <Compile Include="Areas\Administration\Controllers\CountryController.cs" />
     <Compile Include="Areas\Administration\Controllers\HomeController.cs" />
@@ -148,6 +150,8 @@
     <Compile Include="Models\ACTOR.cs">
       <DependentUpon>MoviesRelaxModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Administration\SubTitleModel.cs" />
+    <Compile Include="Models\Administration\DirectorModel.cs" />
     <Compile Include="Models\Administration\ActorModel.cs" />
     <Compile Include="Models\Administration\CountryModel.cs" />
     <Compile Include="Models\Administration\EntityModel.cs" />
@@ -184,6 +188,9 @@
       <DependentUpon>MoviesRelaxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MOVIE_LIKES.cs">
+      <DependentUpon>MoviesRelaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MOVIE_ROLES.cs">
       <DependentUpon>MoviesRelaxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MOVIE_TRAILERS.cs">
@@ -264,6 +271,18 @@
     <Content Include="Areas\Administration\Views\Actor\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Actor\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Actor\Delete.cshtml" />
+    <Content Include="Areas\Administration\Views\Director\AddNew.cshtml" />
+    <Content Include="Areas\Administration\Views\Director\Delete.cshtml" />
+    <Content Include="Areas\Administration\Views\Director\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Director\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\SubTitle\AddNew.cshtml" />
+    <Content Include="Areas\Administration\Views\SubTitle\Delete.cshtml" />
+    <Content Include="Areas\Administration\Views\SubTitle\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\SubTitle\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Users\AddNew.cshtml" />
+    <Content Include="Areas\Administration\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Users\Delete.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

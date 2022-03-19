@@ -6,39 +6,39 @@ using System.Web;
 
 namespace MoviesRelax.Models
 {
-    public class MovieGenreModel: EntityModel
+    public class SubTitleModel : EntityModel
     {
-        public MOVIE_GENRE GetMovieGenre(string code)
+
+        public SUBTITLE GetSubTitle(string code)
         {
             using (var context = new MOVIES_RELAX_Entities())
             {
-                return context.MOVIE_GENRE.Single(x => x.Code == code);
+                return context.SUBTITLES.SingleOrDefault(x => x.Code == code);
             }
         }
 
-        public List<MOVIE_GENRE> GetMovieGenres()
+        public List<SUBTITLE> GetSubTitles()
         {
-            var data = new List<MOVIE_GENRE>();
+            var data = new List<SUBTITLE>();
             using (var context = new MOVIES_RELAX_Entities())
             {
-                var query = from x in context.MOVIE_GENRE
-                             select new
-                             {
-                                 x.Code,
-                                 x.Name,
-                                 x.TimeCreated,
-                                 TimeUpdated = x.TimeUpdated == null ? x.TimeCreated : x.TimeUpdated
-                             };
-
-                foreach (var item in query)
+                var query = from x in context.SUBTITLES
+                       select new
+                       {
+                          x.Code,
+                          x.Name,
+                          x.TimeCreated,
+                          TimeUpdated = x.TimeUpdated == null ? x.TimeCreated : x.TimeUpdated
+                       };
+                foreach(var item in query)
                 {
-                    data.Add(new MOVIE_GENRE() { Code = item.Code, Name = item.Name, TimeCreated = item.TimeCreated, TimeUpdated = item.TimeUpdated });
+                    data.Add(new SUBTITLE() { Code = item.Code, Name = item.Name, TimeCreated = item.TimeCreated, TimeUpdated = item.TimeUpdated });
                 }
             }
             return data;
         }
 
-        public string SaveData(MOVIE_GENRE model, string type)
+        public string SaveData(SUBTITLE model, string type)
         {
             var result = "";
             using (var context = new MOVIES_RELAX_Entities())
@@ -47,19 +47,16 @@ namespace MoviesRelax.Models
                 {
                     model.Code = GetNewCode();
                     model.TimeCreated = DateTime.Now;
-                    context.MOVIE_GENRE.Add(model);
+                    context.SUBTITLES.Add(model);
                 }
                 else
                 {
-                    var data = context.MOVIE_GENRE.SingleOrDefault(m => m.Code == model.Code);
+                    var data = context.SUBTITLES.SingleOrDefault(m => m.Code == model.Code);
                     data.Name = model.Name;
                     data.TimeUpdated = DateTime.Now;
                 }
-
                 if (context.SaveChanges() < 1)
-                {
                     result = "Lưu thất bại";
-                }
             }
             return result;
         }
@@ -68,10 +65,9 @@ namespace MoviesRelax.Models
         {
             using (var context = new MOVIES_RELAX_Entities())
             {
-                var data = GetMovieGenre(code);
-
+                var data = GetSubTitle(code);
                 context.Entry(data).State = System.Data.Entity.EntityState.Deleted;
-                context.MOVIE_GENRE.Remove(data);
+                context.SUBTITLES.Remove(data);
                 if (context.SaveChanges() < 1)
                     return "Xoá thất bại";
             }

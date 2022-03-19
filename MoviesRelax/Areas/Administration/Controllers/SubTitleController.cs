@@ -5,29 +5,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
-using System.IO;
 
 namespace MoviesRelax.Areas.Administration.Controllers
 {
-    public class DirectorController : Controller
+    public class SubTitleController : Controller
     {
-        private DirectorModel _model = new DirectorModel();
+        private SubTitleModel _model = new SubTitleModel();
 
-        private void ProcessImage(DIRECTOR model)
-        {
-            if (model.PhotoImg != null)
-            {
-                var path = "~/archives/directors/";
-                var fileName = Path.GetFileNameWithoutExtension(model.PhotoImg.FileName);
-                var extension = Path.GetExtension(model.PhotoImg.FileName);
-                var newFile = DateTime.Now.ToString("yymmssffff") + extension;
-                model.PhotoPath = path + newFile;
-                newFile = Path.Combine(Server.MapPath(path), newFile);
-                model.PhotoImg.SaveAs(newFile);
-            }
-        }
-
-        // GET: Administration/Actor
+        // GET: Administration/SubTitle
         public ActionResult Index(int? page)
         {
             int pageSize = 6;
@@ -35,10 +20,10 @@ namespace MoviesRelax.Areas.Administration.Controllers
 
             if (page == null)
                 page = 1;
-            
+
             pageNum = page ?? 1;
 
-            var data = _model.GetDirectors().ToPagedList(pageNum, pageSize);
+            var data = _model.GetSubTitles().ToPagedList(pageNum, pageSize);
             return View(data);
         }
 
@@ -47,37 +32,9 @@ namespace MoviesRelax.Areas.Administration.Controllers
             return View();
         }
 
-        [HttpPost]
         public ActionResult Edit(string code)
         {
-            var model = _model.GetDirector(code);
-            if (model == null)
-            {
-                return HttpNotFound();
-            }   
-            return View(model);
-        }
-
-        public ActionResult SaveData(DIRECTOR model, string type)
-        {
-            if (!ModelState.IsValid)
-            {
-                if (type == "A")
-                    return View("AddNew", model);
-                return View("Edit", model);
-            }
-
-            ProcessImage(model);
-            var result = _model.SaveData(model, type);
-
-            if (type == "A")
-                return RedirectToAction("AddNew", "Director");
-            return RedirectToAction("Index", "Director");
-        }
-
-        public ActionResult Delete(string code)
-        {
-            var model = _model.GetDirector(code);
+            var model = _model.GetSubTitle(code);
             if(model == null)
             {
                 return HttpNotFound();
@@ -85,14 +42,39 @@ namespace MoviesRelax.Areas.Administration.Controllers
             return View(model);
         }
 
-        public ActionResult DeleteData(ACTOR model)
+        public ActionResult SaveData(SUBTITLE model, string type)
+        {
+            if (!ModelState.IsValid)
+            {
+                if (type == "A")
+                    return View("AddNew", model);
+                return View("Edit", model);
+            }
+            var result = _model.SaveData(model, type);
+
+            if (type == "A")
+                return RedirectToAction("AddNew", "SubTitle");
+            return RedirectToAction("Index", "SubTitle");
+        }
+
+        public ActionResult Delete(string code)
+        {
+            var model = _model.GetSubTitle(code);
+            if(model == null)
+            {
+                return HttpNotFound();
+            }
+            return View(model);
+        }
+
+        public ActionResult DeleteData(SUBTITLE model)
         {
             var result = _model.DeleteData(model.Code);
             if (!string.IsNullOrEmpty(result))
             {
                 return View("Delete");
             }
-            return RedirectToAction("Index", "Director");
+            return RedirectToAction("Index", "SubTitle");
         }
     }
 }

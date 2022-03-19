@@ -1,0 +1,65 @@
+﻿@model MoviesRelax.Models.USER
+
+@{
+    ViewBag.Title = "Xoá người dùng";
+    Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
+    var lst = ViewData["UserTypes"] as List<SelectListItem>;
+}
+
+@using (Html.BeginForm("DeleteData", "Users", FormMethod.Post, new { @class = "form-data-input", enctype = "multipart/form-data" }))
+{
+    <div class="text">
+        <div class="form-element">
+            @Html.LabelFor(m => m.FullName, new { @class = "label required" })
+            @Html.TextBoxFor(m => m.FullName, new { @class = "textbox-control" })
+        </div>
+
+        <div class="form-element">
+            @Html.LabelFor(m => m.Email, new { @class = "label required" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "textbox-control" })
+        </div>
+
+        <div class="form-element">
+            @Html.LabelFor(m => m.Username, new { @class = "label required" })
+            @Html.TextBoxFor(m => m.Username, new { @class = "textbox-control" })
+        </div>
+
+        <div class="form-element">
+            @Html.LabelFor(m => m.Password, new { @class = "label required" })
+            @Html.PasswordFor(m => m.Password, new { @class = "textbox-control" })
+        </div>
+
+        <div class="form-element">
+            @Html.LabelFor(m => m.UserType, new { @class = "label required" })
+            @Html.TextBoxFor(m => m.UserType, new { @class = "textbox-control" })
+        </div>
+
+        <div class="form-element">
+            @Html.LabelFor(m => m.Auth, new { @class = "label required" })
+            @Html.TextBoxFor(m => m.Auth, new { @class = "textbox-control" })
+        </div>
+
+        <div class="form-element">
+            <p class="buttons">
+                <input type="submit" value="Xác nhận" id="button-confirm" class="button" />
+                <a href="@Url.Action("Index", "Users")" class="button" id="button-cancel">Huỷ bỏ</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="image">
+        <p>
+            @{
+                if (!string.IsNullOrEmpty(Model.PhotoPath) && File.Exists(Server.MapPath(Model.PhotoPath)))
+                {
+                    <img src="@Url.Content(Model.PhotoPath)" id="display-image" />
+                }
+                else
+                {
+                    <img src="~/Images/no-image.svg" id="display-image" />
+                }
+            }
+        </p>
+    </div>
+}
+

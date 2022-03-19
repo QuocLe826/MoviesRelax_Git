@@ -44,6 +44,7 @@
           <Property Name="Children" Type="nvarchar" MaxLength="254" />
           <Property Name="Prize" Type="nvarchar" MaxLength="254" />
           <Property Name="Descriptions" Type="nvarchar(max)" />
+          <Property Name="RoleCode" Type="varchar" MaxLength="20" />
           <Property Name="PhotoPath" Type="varchar(max)" />
           <Property Name="TimeCreated" Type="datetime" />
           <Property Name="TimeUpdated" Type="datetime" />
@@ -76,6 +77,15 @@
           <Property Name="MovieCode" Type="varchar" MaxLength="20" />
           <Property Name="Username" Type="varchar" MaxLength="40" />
           <Property Name="LikeNum" Type="int" />
+          <Property Name="TimeCreated" Type="datetime" />
+          <Property Name="TimeUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MOVIE_ROLES">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="254" />
           <Property Name="TimeCreated" Type="datetime" />
           <Property Name="TimeUpdated" Type="datetime" />
         </EntityType>
@@ -148,11 +158,12 @@ warning 6002: The table/view 'MOVIES_RELAX.dbo.USER_LOGIN' does not have a prima
           </Key>
           <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="FullName" Type="nvarchar" MaxLength="254" />
+          <Property Name="Email" Type="varchar" MaxLength="254" />
           <Property Name="Username" Type="varchar" MaxLength="40" />
           <Property Name="Password" Type="varchar" MaxLength="500" />
           <Property Name="UserType" Type="varchar" MaxLength="20" />
           <Property Name="Auth" Type="nvarchar(max)" />
-          <Property Name="AvatarPath" Type="nvarchar(max)" />
+          <Property Name="PhotoPath" Type="nvarchar(max)" />
           <Property Name="Status" Type="varchar" MaxLength="1" />
           <Property Name="LastLogin" Type="datetime" />
           <Property Name="TimeCreated" Type="datetime" />
@@ -165,6 +176,7 @@ warning 6002: The table/view 'MOVIES_RELAX.dbo.USER_LOGIN' does not have a prima
           <EntitySet Name="MOVIE_COMMENTS" EntityType="Self.MOVIE_COMMENTS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MOVIE_GENRES" EntityType="Self.MOVIE_GENRES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MOVIE_LIKES" EntityType="Self.MOVIE_LIKES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MOVIE_ROLES" EntityType="Self.MOVIE_ROLES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MOVIE_TRAILERS" EntityType="Self.MOVIE_TRAILERS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MOVIES_INFO" EntityType="Self.MOVIES_INFO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SUBTITLES" EntityType="Self.SUBTITLES" Schema="dbo" store:Type="Tables" />
@@ -184,24 +196,7 @@ warning 6002: The table/view 'MOVIES_RELAX.dbo.USER_LOGIN' does not have a prima
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MOVIES_RELAXModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="USER">
-          <Key>
-            <PropertyRef Name="Code" />
-          </Key>
-          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FullName" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="Username" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="UserType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Auth" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AvatarPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TimeCreated" Type="DateTime" Precision="3" />
-          <Property Name="TimeUpdated" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="LastLogin" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityContainer Name="MOVIES_RELAX_Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="USERS" EntityType="Self.USER" />
           <EntitySet Name="USER_LOGIN" EntityType="MOVIES_RELAXModel.USER_LOGIN" />
           <EntitySet Name="USER_TYPES" EntityType="MOVIES_RELAXModel.USER_TYPES" />
           <EntitySet Name="MOVIE_GENRE" EntityType="MOVIES_RELAXModel.MOVIE_GENRE" />
@@ -213,6 +208,8 @@ warning 6002: The table/view 'MOVIES_RELAX.dbo.USER_LOGIN' does not have a prima
           <EntitySet Name="MOVIE_TRAILERS" EntityType="MOVIES_RELAXModel.MOVIE_TRAILERS" />
           <EntitySet Name="MOVIES_INFO" EntityType="MOVIES_RELAXModel.MOVIES_INFO" />
           <EntitySet Name="SUBTITLES" EntityType="MOVIES_RELAXModel.SUBTITLE" />
+          <EntitySet Name="MOVIE_ROLES" EntityType="MOVIES_RELAXModel.MOVIE_ROLES" />
+          <EntitySet Name="USERS" EntityType="MOVIES_RELAXModel.USER" />
         </EntityContainer>
         <EntityType Name="USER_LOGIN">
           <Key>
@@ -284,6 +281,7 @@ warning 6002: The table/view 'MOVIES_RELAX.dbo.USER_LOGIN' does not have a prima
           <Property Name="PhotoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="TimeCreated" Type="DateTime" Precision="3" />
           <Property Name="TimeUpdated" Type="DateTime" Precision="3" />
+          <Property Name="RoleCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="MOVIE_COMMENTS">
           <Key>
@@ -345,29 +343,38 @@ warning 6002: The table/view 'MOVIES_RELAX.dbo.USER_LOGIN' does not have a prima
           <Property Name="TimeCreated" Type="DateTime" Precision="3" />
           <Property Name="TimeUpdated" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="MOVIE_ROLES">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="TimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="TimeUpdated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="UserType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Auth" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <Property Name="TimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="TimeUpdated" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="MOVIES_RELAXModelStoreContainer" CdmEntityContainer="MOVIES_RELAX_Entities">
-    <EntitySetMapping Name="USERS">
-      <EntityTypeMapping TypeName="IsTypeOf(MOVIES_RELAXModel.USER)">
-        <MappingFragment StoreEntitySet="USERS">
-          <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="FullName" ColumnName="FullName" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="UserType" ColumnName="UserType" />
-          <ScalarProperty Name="Auth" ColumnName="Auth" />
-          <ScalarProperty Name="AvatarPath" ColumnName="AvatarPath" />
-          <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
-          <ScalarProperty Name="TimeUpdated" ColumnName="TimeUpdated" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="USER_LOGIN">
       <EntityTypeMapping TypeName="IsTypeOf(MOVIES_RELAXModel.USER_LOGIN)">
         <MappingFragment StoreEntitySet="USER_LOGIN">
@@ -430,6 +437,7 @@ warning 6002: The table/view 'MOVIES_RELAX.dbo.USER_LOGIN' does not have a prima
           <EntitySetMapping Name="DIRECTORS">
             <EntityTypeMapping TypeName="MOVIES_RELAXModel.DIRECTOR">
               <MappingFragment StoreEntitySet="DIRECTORS">
+                <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
                 <ScalarProperty Name="TimeUpdated" ColumnName="TimeUpdated" />
                 <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
                 <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
@@ -506,6 +514,34 @@ warning 6002: The table/view 'MOVIES_RELAX.dbo.USER_LOGIN' does not have a prima
                 <ScalarProperty Name="TimeUpdated" ColumnName="TimeUpdated" />
                 <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MOVIE_ROLES">
+            <EntityTypeMapping TypeName="MOVIES_RELAXModel.MOVIE_ROLES">
+              <MappingFragment StoreEntitySet="MOVIE_ROLES">
+                <ScalarProperty Name="TimeUpdated" ColumnName="TimeUpdated" />
+                <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="MOVIES_RELAXModel.USER">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="TimeUpdated" ColumnName="TimeUpdated" />
+                <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
+                <ScalarProperty Name="Auth" ColumnName="Auth" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
               </MappingFragment>
             </EntityTypeMapping>

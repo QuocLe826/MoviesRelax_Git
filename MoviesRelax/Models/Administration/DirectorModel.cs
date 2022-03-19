@@ -74,7 +74,6 @@ namespace MoviesRelax.Models
                 else
                 {
                     var data = context.DIRECTORS.Single(x => x.Code == model.Code);
-
                     data.Name = model.Name;
                     data.DOB = model.DOB;
                     data.PlaceOBirth = model.PlaceOBirth;
@@ -87,7 +86,9 @@ namespace MoviesRelax.Models
                     data.TimeUpdated = DateTime.Now;
                 }
                 if (context.SaveChanges() < 1)
+                {
                     result = "Lưu thất bại";
+                }
             }
             return result;
         }

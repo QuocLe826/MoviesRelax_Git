@@ -5,18 +5,19 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="10c7d9e5cedf4462ae1322d9ccabbc1d" Name="Diagram1">
-        <EntityTypeShape EntityType="MOVIES_RELAXModel.USER" Width="1.5" PointX="2.125" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MOVIES_RELAXModel.USER_LOGIN" Width="1.5" PointX="3.75" PointY="0.5" />
         <EntityTypeShape EntityType="MOVIES_RELAXModel.USER_TYPES" Width="1.5" PointX="0.5" PointY="0.5" />
         <EntityTypeShape EntityType="MOVIES_RELAXModel.MOVIE_GENRE" Width="1.5" PointX="0.5" PointY="2.625" />
         <EntityTypeShape EntityType="MOVIES_RELAXModel.COUNTRY" Width="1.5" PointX="3.75" PointY="2.625" />
-        <EntityTypeShape EntityType="MOVIES_RELAXModel.ACTOR" Width="1.5" PointX="10.125" PointY="1" />
+        <EntityTypeShape EntityType="MOVIES_RELAXModel.ACTOR" Width="1.5" PointX="9.125" PointY="0.5" />
         <EntityTypeShape EntityType="MOVIES_RELAXModel.DIRECTOR" Width="1.5" PointX="1.125" PointY="4.75" />
         <EntityTypeShape EntityType="MOVIES_RELAXModel.MOVIE_COMMENTS" Width="1.875" PointX="3.125" PointY="4.875" />
         <EntityTypeShape EntityType="MOVIES_RELAXModel.MOVIE_LIKES" Width="1.5" PointX="5.625" PointY="3" />
         <EntityTypeShape EntityType="MOVIES_RELAXModel.MOVIE_TRAILERS" Width="2" PointX="5.375" PointY="0.5" />
         <EntityTypeShape EntityType="MOVIES_RELAXModel.MOVIES_INFO" Width="1.5" PointX="7.5" PointY="0.5" />
-        <EntityTypeShape EntityType="MOVIES_RELAXModel.SUBTITLE" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="MOVIES_RELAXModel.SUBTITLE" Width="1.5" PointX="2.875" PointY="7.375" />
+        <EntityTypeShape EntityType="MOVIES_RELAXModel.MOVIE_ROLES" Width="1.5" PointX="6.375" PointY="6.75" />
+        <EntityTypeShape EntityType="MOVIES_RELAXModel.USER" Width="1.5" PointX="2.125" PointY="0.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

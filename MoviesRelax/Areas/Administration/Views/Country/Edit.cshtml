@@ -7,17 +7,17 @@
 
 @using (Html.BeginForm("SaveData", "Country", new { type = "U"}, FormMethod.Post, new { @class = "form-data-input" }))
 {
-    <h2>Cập nhật thông tin</h2>
-    <hr />
     <div class="form-element">
         @Html.HiddenFor(m => m.Code)
         @Html.LabelFor(m => m.Name, new { @class = "label required" })
-        @Html.TextBoxFor(m => m.Name, new { @class = "textbox-input"})
+        @Html.TextBoxFor(m => m.Name, new { @class = "textbox-control" })
         @Html.ValidationMessageFor(m => m.Name, null, new { @class = "message-error" })
     </div>
     <div class="form-element">
-        <input type="submit" value="Lưu" id="button-save" class="button"/>
-        <a href="@Url.Action("Index", "Country")" class="button" id="button-cancel">Huỷ bỏ</a>
+        <p class="buttons">
+            <input type="submit" value="Lưu" id="button-save" class="button" />
+            <a href="@Url.Action("Index", "Country")" class="button" id="button-cancel">Huỷ bỏ</a>
+        </p>
     </div>
 }
 

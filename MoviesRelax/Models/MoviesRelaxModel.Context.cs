@@ -25,7 +25,6 @@ namespace MoviesRelax.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<USER> USERS { get; set; }
         public virtual DbSet<USER_LOGIN> USER_LOGIN { get; set; }
         public virtual DbSet<USER_TYPES> USER_TYPES { get; set; }
         public virtual DbSet<MOVIE_GENRE> MOVIE_GENRE { get; set; }
@@ -37,5 +36,7 @@ namespace MoviesRelax.Models
         public virtual DbSet<MOVIE_TRAILERS> MOVIE_TRAILERS { get; set; }
         public virtual DbSet<MOVIES_INFO> MOVIES_INFO { get; set; }
         public virtual DbSet<SUBTITLE> SUBTITLES { get; set; }
+        public virtual DbSet<MOVIE_ROLES> MOVIE_ROLES { get; set; }
+        public virtual DbSet<USER> USERS { get; set; }
     }
 }

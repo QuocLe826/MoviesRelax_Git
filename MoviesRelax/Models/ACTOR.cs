@@ -24,8 +24,9 @@ namespace MoviesRelax.Models
         public string Children { get; set; }
         public string Prize { get; set; }
         public string Descriptions { get; set; }
-        public string PhotoPath { get; set; }
         public HttpPostedFileBase PhotoImg { get; set; }
+
+        public string PhotoPath { get; set; }
         public Nullable<System.DateTime> TimeCreated { get; set; }
         public Nullable<System.DateTime> TimeUpdated { get; set; }
     }
